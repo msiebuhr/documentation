@@ -4,6 +4,7 @@ import ntpath
 from optparse import OptionParser
 import os
 import re
+from shutil import copyfile
 
 import yaml
 
@@ -46,6 +47,8 @@ def create_placeholder_file(template, new_glob):
     with open(template) as o_file:
         content = o_file.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+        # U+FEFF is the Byte Order Mark character, which should only occur at the start of a document.
+        content = content.replace(u'\ufeff', '').strip()
         split = boundary.split(content, 2)
         if len(split) == 3:
             _, fm, content = split
