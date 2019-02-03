@@ -1,4 +1,9 @@
 ---
 title: TITLE OF YOUR API
-external_redirect: /api/
+type: apicontent
+order: XX
 ---
+
+## TITLE OF YOUR API
+
+This is my API description
