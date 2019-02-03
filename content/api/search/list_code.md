@@ -6,12 +6,12 @@ order: XX.1
 
 ##### Signature
 
-`GET api/v1/my/api/endpoint`
+`GET api/v1/logs-queries/list`
 
 ##### Example Request
 
-{{< code-snippets basename="api-ENDPOINT" >}}
+{{< code-snippets basename="api-list" >}}
 
 ##### Example Response
 
-{{< code-snippets basename="result.api-ENDPOINT" >}}
+{{< code-snippets basename="result.api-list" >}}
