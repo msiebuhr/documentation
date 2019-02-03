@@ -4,13 +4,32 @@ type: apicontent
 order: XX.1
 ---
 
-## ENDPOINT TITLE
+## LIST
 
-This is my endpoint description
+List endpoint returns logs that match a log search query. Results are paginated.
+
 
 ##### ARGUMENTS
 
-* `arg_1` [*required*]:  
-    My arg_1 description
-* `arg_2` [*optional*, *default*=**None**]:  
-    My arg_2 description
+* `query` [*required*]:  
+    the search query - following https://docs.datadoghq.com/logs/explorer/search/#search-syntax syntax
+* `time.from` [*required*]:  
+    minimum timestamp for requested logs. Format can be either
+    - an ISO-8601 string
+    - a unix timestamp (number representing the elapsed millisec since epoch)
+* `time.to` [*required*]:  
+    maximum timestamp for requested logs. Format can be either
+    - an ISO-8601 string
+    - a unix timestamp (number representing the elapsed millisec since epoch)
+* `time.offset` [*optional*, *default*=**None**]:
+   (value in seconds)
+* `time.timezone` [*optional*, *default*=**None**]:
+   can be specified both as an offset (eg "UTC+03:00") or a regional zone (eg "Europe/Paris").
+   if both timezone and offset are specified, timezon is ignored
+* `startAt` [*optional*, *default*=**None**]:  
+   For pagination purpose. Hash of the first log returned. 
+   Response includes hash of the first non-returned log.
+* `sort` [*optional*, *default*=**desc**]:  
+    Time-ascending or time-descending results.
+* `limit` [*optional*, *default*=**10**]:  
+    Number of logs return in the response (maximum is 1000)
