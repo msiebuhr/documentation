@@ -1479,12 +1479,11 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Trace ID Logs Injection
+## Correlate Traces and Logs
 
-For each generated trace, there are very likely log events written by the monitored functions and applications.
-The purpose of this section is to explain how the correlation between traces and logs can be improved by automatically adding a trace id in your logs and then use it in the Datadog platform to show you the exact logs correlated to the observed trace.
+For each generated trace, there can be log events written by the monitored functions and applications. Datadog tracing libraries can automatically inject a `trace_id` and `span_id` into your logs and it will be shown when viewing a trace. 
 
-{{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
+{{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:85%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -1493,7 +1492,7 @@ Use one of the following options to inject Java trace information into your logs
 
 **Automatic Trace ID Injection**
 
-Enable injection in the [Java Tracer's configuration][2] via the `dd.logs.injection` parameter.
+Enable injection in the [Java Tracer's [configuration][2] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
@@ -1572,9 +1571,7 @@ Use one of the following options to inject Python trace information into your lo
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
-**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection.
-
-**Note**: `ddtrace-run` calls `logging.basicConfig` before executing your application. Since that function does nothing if the root logger has a handler configured, your application will have to modify the root logger and handler directly.
+**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application will have to modify the root logger and handler directly.
 
 **Manual Trace ID Injection with Standard Library Logging**
 
@@ -1728,6 +1725,11 @@ See our [Ruby logging documentation][2] to verify the Ruby log integration is pr
 [2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Go" %}}
+
+Use the following example to inject Go trace information into your logs.
+
+**Manual Trace ID Injection for Go**
+
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
 
 ```go
@@ -1847,7 +1849,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-**Automatic Trace ID Injection**
+**Manual Trace ID Injection**
 
 Use the following example to inject PHP trace information into your logs.
 
