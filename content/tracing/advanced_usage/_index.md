@@ -1481,9 +1481,9 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 ## Correlate Traces and Logs
 
-For each generated trace, there can be log events written by the monitored functions and applications. Datadog tracing libraries can automatically inject a `trace_id` and `span_id` into your logs and it will be shown when viewing a trace. 
+The correlation between traces and logs is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the Datadog platform to show you the exact logs correlated to the observed trace.
 
-{{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:85%;">}}
+{{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}
