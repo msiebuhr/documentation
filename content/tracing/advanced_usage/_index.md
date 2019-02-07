@@ -1847,7 +1847,9 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-The following example injects the required `dd.trace_id` and `dd.span_id` identifiers into the log message to associate the log entry with the current trace.
+**Automatic Trace ID Injection**
+
+Use the following example to inject PHP trace information into your logs.
 
 ```php
 $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
